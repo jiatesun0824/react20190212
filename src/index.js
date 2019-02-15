@@ -5,11 +5,13 @@ import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 import baseObj from './api/home.js'
 import 'lib-flexible';
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
+
 import { Provider } from 'react-redux';
-import { reducer} from '@/store/home/index.js';
+import store from '@/store/store.js';
+
 window.api = baseObj
-const store = createStore(reducer)
+// const store = createStore(reducer)
 //连接组件
 
 ReactDOM.render(

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Footer } from '@/components/footer/footer.jsx'
+import  Footer from '@/components/footer/footer.jsx'
 import '@/App.scss'
 import { Route, Redirect } from 'react-router'
 import { HashRouter, Switch } from 'react-router-dom'
 import Home from '@/pages/home/home.jsx'
 import Case from '@/pages/case/case.jsx'
-import { mapDispatchToProps, mapStateToProps} from '@/store/home/index.js';
+import { mapDispatchToProps } from '@/store/home/index.js';
 import { connect } from 'react-redux';
 // import routers from './routers/index.js'
 class App extends Component {
@@ -26,6 +26,9 @@ class App extends Component {
     );
   }
 }
-App = connect(mapStateToProps, mapDispatchToProps)(App)
+App = connect((state) => ({
+  loadingShow: state.reducer.loadingShow,
+  footerIsShow: state.reducer.footerIsShow
+}), mapDispatchToProps)(App)
 
 export default App;

@@ -2,6 +2,9 @@ import React from 'react'
 import propTypes from 'prop-types'
 import './footer.scss'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { mapDispatchToProps } from '@/store/home/index.js';
+
 
 class Footer extends React.Component {
   constructor(props) { // 初始化
@@ -44,6 +47,9 @@ class Footer extends React.Component {
   }
   componentWillUnmount() { // 卸载组件时触发
   }
+  changeFooterShow() {
+    this.props.setFooterIsShow(false)
+  }
   changeUserName() {
     this.setState(preState => ({
       text: preState.text + 1
@@ -81,12 +87,11 @@ class Footer extends React.Component {
     })
   }
   render() {
-    console.log(this.props)
     return (
       <div className='footer'>
         <ul className="footer-list">
         {this.state.footerList.map((value, index) => {
-          return <li className='list-item' key={index} onClick={this.changeFooterList.bind(this)}>
+          return <li className='list-item' key={index} onClick={this.changeFooterShow.bind(this)}>
             <Link to={value.routerPath}>
             <div className='item-logo'><img src={value.logoPath} alt=""/></div>
             <div className='item-text'>{value.name}</div>
@@ -104,4 +109,7 @@ Footer.propTypes = { // 设置组件类型
 Footer.defaultProps = { // 设置组件，默认值
   userName: '孙卫其'
 }
-export { Footer }
+export default connect((state) => ({
+  loadingShow: state.loadingShow,
+  footerIsShow: state.footerIsShow
+}), mapDispatchToProps)(Footer)
